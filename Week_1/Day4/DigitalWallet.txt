@@ -1,0 +1,32 @@
+Start
+
+Class Transaction:
+    Attribute transactionId
+    Attribute merchant
+    Attribute month
+    Attribute amount
+
+    Constructor(transactionId, merchant, month, amount):
+        this.transactionId = transactionId
+        this.merchant = merchant
+        this.month = month
+        this.amount = amount
+
+Class WalletReport:
+    Attribute transactionList
+
+    Constructor():
+        transactionList = new List<Transaction>()
+
+    Method addTransaction(transaction):
+        transactionList.add(transaction)
+
+    Method generateReport():
+        groupedData = transactionList.stream()
+                                     .collect(groupBy(merchant, month))
+
+        For each merchant in groupedData:
+            For each month in groupedData[merchant]:
+                total = sum of transaction.amount for groupedData[merchant][month]
+                Print "Merchant: " + merchant + ", Month: " + month + ", Total: " + total
+ End

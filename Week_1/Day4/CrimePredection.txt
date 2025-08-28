@@ -1,0 +1,35 @@
+Start
+
+Class Zone:
+    Attribute zoneId
+    Attribute riskScore
+
+    Constructor(zoneId, riskScore):
+        this.zoneId = zoneId
+        this.riskScore = riskScore
+
+Class CityGraph:
+    Attribute adjacencyList
+
+    Constructor():
+        adjacencyList = new Map<Zone, List<Zone>>()
+
+    Method addConnection(zone1, zone2):
+        adjacencyList[zone1].add(zone2)
+        adjacencyList[zone2].add(zone1)
+
+    Method dfs(zone, visited):
+        Mark zone as visited
+        Print "Visiting Zone: " + zone.zoneId + " Risk: " + zone.riskScore
+
+        For each neighbor in adjacencyList[zone]:
+            If neighbor not visited Then
+                dfs(neighbor, visited)
+
+    Method findHighRiskZones(threshold):
+        visited = empty Set
+        For each zone in adjacencyList:
+            If zone.riskScore > threshold AND zone not visited Then
+                dfs(zone, visited)
+
+ End

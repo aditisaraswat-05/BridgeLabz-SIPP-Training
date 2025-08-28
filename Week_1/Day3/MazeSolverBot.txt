@@ -1,0 +1,34 @@
+						                Solution
+-------------------------------------------------------------------------------------------------
+
+Start
+
+Class MazeSolver:
+    Attribute maze
+    Attribute solutionPath
+
+    Constructor(maze):
+        this.maze = maze
+        solutionPath = empty List
+
+    Method solve(x, y):
+        If (x,y) is outside maze OR maze[x][y] is wall OR maze[x][y] is visited Then
+            Return false
+
+        If (x,y) is destination Then
+            Add (x,y) to solutionPath
+            Return true
+
+        Mark maze[x][y] as visited
+        Add (x,y) to solutionPath
+
+        If solve(x+1, y) Then Return true
+        If solve(x, y+1) Then Return true
+        If solve(x-1, y) Then Return true
+        If solve(x, y-1) Then Return true
+
+        Remove (x,y) from solutionPath
+        Return false
+
+-------------------------------------------------------------------------------------------------
+						                End

@@ -1,0 +1,26 @@
+package Week_1.Day2;
+// Smart Farming System
+// Abstract class Crop with implementations like Rice, Wheat. Add methods for
+// water requirement and harvesting.
+
+Start
+
+Abstract Class Crop:Attribute name Attribute waterRequirement
+
+Constructor(name,waterRequirement):this.name=name this.waterRequirement=waterRequirement
+
+Abstract Method getWaterRequirement()Abstract Method harvest()
+
+Class Rice extends Crop:Constructor(name,waterRequirement):super(name,waterRequirement)
+
+Method getWaterRequirement():Return this.waterRequirement+" liters per day"
+
+Method harvest():Print"Rice crop harvested after 120 days"
+
+Class Wheat extends Crop:Constructor(name,waterRequirement):super(name,waterRequirement)
+
+Method getWaterRequirement():Return this.waterRequirement+" liters per day"
+
+Method harvest():Print"Wheat crop harvested after 90 days"
+
+End

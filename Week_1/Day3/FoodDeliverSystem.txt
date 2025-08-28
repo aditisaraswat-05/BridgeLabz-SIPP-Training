@@ -1,0 +1,48 @@
+						                Solution
+-------------------------------------------------------------------------------------------------
+
+Start
+
+Class Customer:
+    Attribute name
+    Attribute address
+
+    Constructor(name, address):
+        this.name = name
+        this.address = address
+
+Class Restaurant:
+    Attribute name
+    Attribute location
+
+    Constructor(name, location):
+        this.name = name
+        this.location = location
+
+Class DeliveryBoy:
+    Attribute name
+    Attribute phoneNumber
+
+    Constructor(name, phoneNumber):
+        this.name = name
+        this.phoneNumber = phoneNumber
+
+Class Order:
+    Attribute customer
+    Attribute restaurant
+    Attribute deliveryBoy
+    Attribute orderDetails
+
+    Constructor(customer, restaurant, deliveryBoy, orderDetails):
+        this.customer = customer
+        this.restaurant = restaurant
+        this.deliveryBoy = deliveryBoy
+        this.orderDetails = orderDetails
+
+    Method getOrderSummary():
+        Print "Order from " + restaurant.name
+        Print "Deliver to " + customer.name + ", Address: " + customer.address
+        Print "Delivery by " + deliveryBoy.name
+
+-------------------------------------------------------------------------------------------------
+						                End

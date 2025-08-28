@@ -1,0 +1,49 @@
+						                Solution
+-------------------------------------------------------------------------------------------------
+
+Start
+
+Interface Searchable:
+    Method search(keyword)
+
+Interface Printable:
+    Method printReport()
+
+Class LabReport implements Searchable, Printable:
+    Attribute reportId
+    Attribute content
+
+    Constructor(reportId, content):
+        this.reportId = reportId
+        this.content = content
+
+    Method search(keyword):
+        If keyword in content Then
+            Return true
+        Else
+            Return false
+
+    Method printReport():
+        Print "Lab Report ID: " + reportId
+        Print content
+
+Class Prescription implements Searchable, Printable:
+    Attribute prescriptionId
+    Attribute medicines
+
+    Constructor(prescriptionId, medicines):
+        this.prescriptionId = prescriptionId
+        this.medicines = medicines
+
+    Method search(keyword):
+        If keyword in medicines Then
+            Return true
+        Else
+            Return false
+
+    Method printReport():
+        Print "Prescription ID: " + prescriptionId
+        Print medicines
+
+-------------------------------------------------------------------------------------------------
+						                End

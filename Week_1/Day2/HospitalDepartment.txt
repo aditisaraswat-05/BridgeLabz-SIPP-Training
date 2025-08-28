@@ -1,0 +1,44 @@
+
+Start
+
+Class Flight:
+    Attribute flightId
+    Attribute price
+    Attribute duration
+
+    Constructor(flightId, price, duration):
+        this.flightId = flightId
+        this.price = price
+        this.duration = duration
+
+Class FlightAnalyzer:
+    Method compare(flight1, flight2):
+        If flight1.price != flight2.price Then
+            Return flight1.price - flight2.price
+        Else
+            Return flight1.duration - flight2.duration
+
+    Method mergeSort(flightList):
+        If flightList.size <= 1 Then
+            Return flightList
+
+        mid = flightList.size / 2
+        left = mergeSort(first half of flightList)
+        right = mergeSort(second half of flightList)
+
+        Return merge(left, right)
+
+    Method merge(left, right):
+        result = empty List
+        While left and right not empty:
+            If compare(left[0], right[0]) < 0 Then
+                result.add(left[0])
+                Remove left[0]
+            Else
+                result.add(right[0])
+                Remove right[0]
+
+        Add remaining elements of left and right
+        Return result
+
+End

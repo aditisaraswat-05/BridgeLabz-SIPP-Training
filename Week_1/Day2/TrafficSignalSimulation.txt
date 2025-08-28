@@ -1,0 +1,18 @@
+package Week_1.Day2;
+// Traffic Signal Simulation
+// Use an enum for TrafficLight and a class that switches lights based on time
+// intervals.
+
+Start
+
+Enum TrafficLight:RED YELLOW GREEN
+
+Class TrafficSignal:Attribute currentLight Attribute interval
+
+Constructor(interval):this.currentLight=TrafficLight.RED this.interval=interval
+
+Method getCurrentLight():Return this.currentLight
+
+Method switchLight():If currentLight==TrafficLight.RED Then currentLight=TrafficLight.GREEN Else If currentLight==TrafficLight.GREEN Then currentLight=TrafficLight.YELLOW Else If currentLight==TrafficLight.YELLOW Then currentLight=TrafficLight.RED End If
+
+Method runSignal():While true:Print currentLight Wait interval seconds switchLight()

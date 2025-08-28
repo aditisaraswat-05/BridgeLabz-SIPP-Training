@@ -1,0 +1,37 @@
+
+Start
+
+
+
+Class Patient:
+    Attribute patientId
+    Attribute name
+    Attribute age
+
+    Constructor(patientId, name, age):
+        this.patientId = patientId
+        this.name = name
+        this.age = age
+
+Class PatientRecordManager:
+    Attribute patientMap
+
+    Constructor():
+        patientMap = new HashMap<Integer, Patient>()
+
+    Method addPatient(patient):
+        patientMap[patient.patientId] = patient
+
+    Method getPatient(patientId):
+        Return patientMap[patientId]
+
+    Method updatePatient(patientId, newName, newAge):
+        If patientId in patientMap Then
+            patientMap[patientId].name = newName
+            patientMap[patientId].age = newAge
+
+    Method deletePatient(patientId):
+        If patientId in patientMap Then
+            Remove patientMap[patientId]
+
+End

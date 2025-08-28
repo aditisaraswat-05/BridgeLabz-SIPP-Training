@@ -1,0 +1,36 @@
+Start
+
+Class Student:
+    Attribute name
+    Attribute rollNo
+
+    Constructor(name, rollNo):
+        this.name = name
+        this.rollNo = rollNo
+
+Class Course:
+    Attribute courseName
+    Attribute courseCode
+
+    Constructor(courseName, courseCode):
+        this.courseName = courseName
+        this.courseCode = courseCode
+
+Class CourseRegistration:
+    Attribute courseMap
+
+    Constructor():
+        courseMap = new Map<Course, List<Student>>()
+
+    Method registerStudent(course, student):
+        If course not in courseMap Then
+            courseMap[course] = new List<Student>()
+        courseMap[course].add(student)
+
+    Method displayStudents():
+        For each course in courseMap:
+            Print "Course: " + course.courseName
+            For each student in courseMap[course]:
+                Print "Student: " + student.name + ", Roll: " + student.rollNo
+
+End

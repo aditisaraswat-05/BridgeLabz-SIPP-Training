@@ -1,0 +1,32 @@
+Start
+
+Generic Class Transaction<T>:
+    Attribute transactionId
+    Attribute methodType (T)
+
+    Constructor(transactionId, methodType):
+        this.transactionId = transactionId
+        this.methodType = methodType
+
+    Method processTransaction():
+        Print "Processing transaction ID: " + transactionId
+        Print "Payment Method: " + methodType
+
+Class UPI:
+    Attribute upiId
+
+    Constructor(upiId):
+        this.upiId = upiId
+
+Class Card:
+    Attribute cardNumber
+
+    Constructor(cardNumber):
+        this.cardNumber = cardNumber
+
+Class NetBanking:
+    Attribute accountNumber
+
+    Constructor(accountNumber):
+        this.accountNumber = accountNumber
+End

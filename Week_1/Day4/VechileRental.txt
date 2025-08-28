@@ -1,0 +1,37 @@
+
+Start
+Interface Rentable:
+    Method rent()
+    Method returnVehicle()
+
+Abstract Class Vehicle implements Rentable:
+    Attribute vehicleId
+    Attribute brand
+
+    Constructor(vehicleId, brand):
+        this.vehicleId = vehicleId
+        this.brand = brand
+
+Class Car extends Vehicle:
+    Method rent():
+        Print "Car rented: " + brand
+
+    Method returnVehicle():
+        Print "Car returned: " + brand
+
+Class Bike extends Vehicle:
+    Method rent():
+        Print "Bike rented: " + brand
+
+    Method returnVehicle():
+        Print "Bike returned: " + brand
+
+Class VehicleFactory:
+    Method createVehicle(type, vehicleId, brand):
+        If type == "Car" Then
+            Return new Car(vehicleId, brand)
+        Else If type == "Bike" Then
+            Return new Bike(vehicleId, brand)
+        Else
+            Return null
+ End

@@ -1,0 +1,49 @@
+Start
+
+Class Account:
+    Attribute accountNumber
+    Attribute balance
+
+    Constructor(accountNumber, balance):
+        this.accountNumber = accountNumber
+        this.balance = balance
+
+    Method deposit(amount):
+        balance = balance + amount
+        Print "Deposited: " + amount
+
+    Method withdraw(amount):
+        Print "Base withdraw - to be overridden"
+
+Class SavingAccount extends Account:
+    Attribute withdrawalLimit
+
+    Constructor(accountNumber, balance, withdrawalLimit):
+        super(accountNumber, balance)
+        this.withdrawalLimit = withdrawalLimit
+
+    Method withdraw(amount):
+        If amount <= balance AND amount <= withdrawalLimit Then
+            balance = balance - amount
+            Print "Withdrawal Successful from Saving Account"
+        Else
+            Print "Withdrawal Failed: Limit Exceeded or Insufficient Balance"
+
+Class CurrentAccount extends Account:
+
+    Constructor(accountNumber, balance):
+        super(accountNumber, balance)
+
+    Method withdraw(amount):
+        If amount <= balance Then
+            balance = balance - amount
+            Print "Withdrawal Successful from Current Account"
+        Else
+            Print "Withdrawal Failed: Insufficient Balance"
+
+
+  End
+
+
+
+                                        

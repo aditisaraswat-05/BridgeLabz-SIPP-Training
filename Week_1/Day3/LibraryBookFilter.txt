@@ -1,0 +1,35 @@
+						                Solution
+-------------------------------------------------------------------------------------------------
+
+Start
+
+
+
+Class Book:
+    Attribute title
+    Attribute publishYear
+    Attribute rating
+
+    Constructor(title, publishYear, rating):
+        this.title = title
+        this.publishYear = publishYear
+        this.rating = rating
+
+Class Library:
+    Attribute bookList
+
+    Constructor():
+        bookList = new List<Book>()
+
+    Method addBook(book):
+        bookList.add(book)
+
+    Method filterBooks():
+        result = bookList.stream()
+                         .filter(book -> book.publishYear > 2015)
+                         .filter(book -> book.rating > 4.5)
+                         .collect(toList())
+        Return result
+
+-------------------------------------------------------------------------------------------------
+						                End

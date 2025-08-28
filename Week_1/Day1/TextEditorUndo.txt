@@ -1,0 +1,40 @@
+//Question 3 -  Undo Feature in Text Editor
+// Use a Stack to store undo operations and implement revert functionality.
+	
+
+Class TextEditor:
+
+Attribute content
+Attribute undoStack
+
+Constructor(){
+this.content = ""
+this.undoStack = new Stack()
+}
+
+
+Method undo():
+If undoStack.isEmpty() Then
+Print "Nothing to undo"
+Return
+End If
+
+
+this.content = undoStack.pop()
+Print "Undid last operation"
+
+
+Method getContent():
+Return this.content
+
+End class
+
+
+editor.undo()             
+Print editor.getContent() 
+
+
+editor.undo()            
+Print editor.getContent()
+
+ End

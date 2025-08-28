@@ -1,0 +1,11 @@
+package Week_1.Day2;
+
+Start
+
+Class QuizTimer:Attribute circularArray Attribute size Attribute currentIndex
+
+Constructor(size):this.size=size this.circularArray=new Array of size this.currentIndex=0
+
+Method addTimeSlot(time):circularArray[currentIndex]=time currentIndex=(currentIndex+1)%size
+
+Method startTimer():For each time in circularArray:Print"Time allocated: "+time If time<=10 seconds Then Print"Warning: Time is about to end!"
