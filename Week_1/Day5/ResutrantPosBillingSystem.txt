@@ -1,0 +1,139 @@
+
+Start
+
+Class Item:
+    Attribute name
+    Attribute price
+    Attribute isPremium
+
+    Constructor(name, price, isPremium):
+        this.name = name
+        this.price = price
+        this.isPremium = isPremium
+
+Interface TaxCalculator:
+    Method computeTax(item: Item): Double
+
+Class FoodTax implements TaxCalculator:
+    Method computeTax(item):
+        Return item.price * 0.05
+
+Class BeverageTax implements TaxCalculator:
+    Method computeTax(item):
+        Return item.price * 0.12
+
+Class ImportedTax implements TaxCalculator:
+    Attribute baseTax: TaxCalculator
+    Attribute customsRate
+
+    Constructor(baseTax, customsRate):
+        this.baseTax = baseTax
+        this.customsRate = customsRate
+
+    Method computeTax(item):
+        base = baseTax.computeTax(item)
+        customs = item.price * customsRate
+        Return base + customs
+
+
+Class LuxuryTax implements TaxCalculator:
+    Attribute baseTax: TaxCalculator
+    Attribute luxuryRate
+
+    Constructor(baseTax, luxuryRate):
+        this.baseTax = baseTax
+        this.luxuryRate = luxuryRate
+
+    Method computeTax(item):
+        base = baseTax.computeTax(item)
+        extra = 0
+        If item.isPremium Then
+            extra = item.price * luxuryRate
+        Return base + extra
+
+
+Interface DiscountPolicy:
+    Method apply(amount: Double): Double
+
+Class NoDiscount implements DiscountPolicy:
+    Method apply(amount):
+        Return amount
+
+Class FlatDiscount implements DiscountPolicy:
+    Attribute flatAmount
+    Constructor(flatAmount):
+        this.flatAmount = flatAmount
+    Method apply(amount):
+        Return max(0, amount - flatAmount)
+
+Class PercentageDiscount implements DiscountPolicy:
+    Attribute percent   
+    Constructor(percent):
+        this.percent = percent
+    Method apply(amount):
+        Return amount * (1 - percent)
+
+
+Class BuyOneGetOneDiscount implements DiscountPolicy:
+    Attribute eligibleItemNames: List<String>
+    Constructor(eligibleItemNames):
+        this.eligibleItemNames = eligibleItemNames
+    Method apply(amount):
+        
+        Return amount * 0.85
+
+
+Class BillCalculator:
+    Attribute lineItems: Map<Item, TaxCalculator>
+    Attribute discountPolicy: DiscountPolicy
+
+    Constructor():
+        lineItems = new Map<Item, TaxCalculator>()
+        discountPolicy = new NoDiscount()
+
+    Method addItem(item, taxCalculator):
+        lineItems[item] = taxCalculator
+
+    Method setDiscount(discount):
+        discountPolicy = discount
+
+    Method totalBeforeDiscount():
+        subtotal = 0
+        taxes = 0
+        For each (item, taxCalc) in lineItems:
+            subtotal = subtotal + item.price
+            taxes = taxes + taxCalc.computeTax(item)
+        Return subtotal + taxes
+
+    Method finalBill():
+        gross = totalBeforeDiscount()
+        Return discountPolicy.apply(gross)
+
+
+Function demoPOS():
+    paneer = new Item("Paneer Tikka", 300, false)
+    coke = new Item("Coke", 80, false)
+    importedCheese = new Item("Imported Cheese", 500, true)
+
+    calc = new BillCalculator()
+
+    calc.addItem(paneer, new FoodTax())
+    calc.addItem(coke, new BeverageTax())
+    baseForImported = new FoodTax()
+    calc.addItem(importedCheese, new ImportedTax(baseForImported, 0.10)) 
+
+    calc.setDiscount(new PercentageDiscount(0.10)) 
+    Print calc.finalBill()
+
+    
+    calc.setDiscount(new BuyOneGetOneDiscount(["Coke"]))
+    Print calc.finalBill()
+
+  
+    calc = new BillCalculator()
+    luxFood = new LuxuryTax(new FoodTax(), 0.08) 
+    calc.addItem(importedCheese, new ImportedTax(luxFood, 0.10))
+    calc.setDiscount(new NoDiscount())
+    Print calc.finalBill()
+
+ End

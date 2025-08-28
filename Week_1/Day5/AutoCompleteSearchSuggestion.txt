@@ -1,0 +1,69 @@
+
+Start
+
+Class TrieNode:
+    Attribute children  
+    Attribute isEnd
+    Attribute popularity
+    Attribute word      
+
+    Constructor():
+        children = new Map<Character, TrieNode>()
+        isEnd = false
+        popularity = 0
+        word = ""
+
+Class Trie:
+    Attribute root
+
+    Constructor():
+        root = new TrieNode()
+
+    Method insert(keyword, pop):
+        node = root
+        For each ch in keyword:
+            If ch not in node.children Then
+                node.children[ch] = new TrieNode()
+            node = node.children[ch]
+        node.isEnd = true
+        node.popularity = node.popularity + pop
+        node.word = keyword
+
+    Method findNode(prefix):
+        node = root
+        For each ch in prefix:
+            If ch not in node.children Then
+                Return null
+            node = node.children[ch]
+        Return node
+
+    Method suggestions(prefix, N):
+        start = findNode(prefix)
+        If start == null Then
+            Return empty List
+
+        results = new List<Pair<String, Integer>>()
+        dfs(start, results)
+
+
+        sort results by (-popularity, word)
+        Return first N words from results
+
+    Method dfs(node, results):
+        If node.isEnd Then
+            results.add((node.word, node.popularity))
+        For each child in node.children.values():
+            dfs(child, results)
+
+
+Function demoTrie():
+    t = new Trie()
+    t.insert("pizza hut", 50)
+    t.insert("pizza point", 30)
+    t.insert("pita bread", 40)
+    t.insert("pizzeria", 10)
+    Print t.suggestions("pi", 3)  // expects the top 3 by popularity
+    t.insert("pineapple cafe", 25)
+    Print t.suggestions("pi", 4)
+
+ End

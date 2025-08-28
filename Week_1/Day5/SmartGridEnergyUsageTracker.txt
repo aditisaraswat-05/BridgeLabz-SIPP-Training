@@ -1,0 +1,65 @@
+Start
+
+Class Zone:
+    Attribute name
+    Constructor(name):
+        this.name = name
+
+Class Day:
+    Attribute dateString
+    Constructor(dateString):
+        this.dateString = dateString
+
+Class Reading:
+    Attribute kwValue
+    Constructor(kwValue):
+        this.kwValue = kwValue
+
+Class EnergyTracker:
+    Attribute data 
+    Constructor():
+        data = new Map<Zone, Map<Day, List<Reading>>>()
+
+    Method addReading(zone, day, reading):
+        If zone not in data Then
+            data[zone] = new Map<Day, List<Reading>>()
+        If day not in data[zone] Then
+            data[zone][day] = new List<Reading>()
+        data[zone][day].add(reading)
+
+    Method computePeakReport():
+        report = new Map<Zone, Map<Day, Integer>>()
+        For each zone in data:
+            zoneMap = new Map<Day, Integer>()
+            For each day in data[zone]:
+                peak = data[zone][day].stream()
+                        .map(r -> r.kwValue)
+                        .max()
+                zoneMap[day] = peak
+            report[zone] = zoneMap
+
+        
+        For each zone in report:
+            Print "Zone: " + zone.name
+            For each day in report[zone]:
+                Print "  Day: " + day.dateString + " Peak: " + report[zone][day] + "kW"
+
+        Return report
+
+
+
+Function demoEnergy():
+    et = new EnergyTracker()
+    zA = new Zone("Zone-A")
+    zB = new Zone("Zone-B")
+    d = new Day("2025-08-01")
+    et.addReading(zA, d, new Reading(120))
+    et.addReading(zA, d, new Reading(90))
+    et.addReading(zA, d, new Reading(200))
+    et.addReading(zA, d, new Reading(150))
+    et.addReading(zB, d, new Reading(300))
+    et.addReading(zB, d, new Reading(350))
+    et.addReading(zB, d, new Reading(250))
+    et.computePeakReport()
+
+End

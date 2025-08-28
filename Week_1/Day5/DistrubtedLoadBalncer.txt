@@ -1,0 +1,50 @@
+
+Start
+
+Class Server:
+    Attribute id
+    Constructor(id):
+        this.id = id
+
+Class LoadBalancer:
+    Attribute queue  
+
+    Constructor():
+        queue = new Queue<Server>()
+
+    Method addServer(server):
+        queue.enqueue(server)
+
+    Method removeServer(serverId):
+        temp = new Queue<Server>()
+        While queue not empty:
+            s = queue.dequeue()
+            If s.id != serverId Then
+                temp.enqueue(s)
+        queue = temp
+
+    Method assignRequest(requestId):
+        If queue is empty Then
+            Print "No active servers for " + requestId
+            Return null
+        s = queue.dequeue()
+        Print requestId + " -> " + s.id
+        queue.enqueue(s)
+        Return s
+
+    Method processRequests(requestCount):
+        For i from 1 to requestCount:
+            assignRequest("R" + i)
+
+Function demoLB():
+    lb = new LoadBalancer()
+    lb.addServer(new Server("S1"))
+    lb.addServer(new Server("S2"))
+    lb.addServer(new Server("S3"))
+    lb.processRequests(3)
+    lb.addServer(new Server("S4"))
+    lb.processRequests(2)
+    lb.removeServer("S2")
+    lb.processRequests(3)
+
+ End

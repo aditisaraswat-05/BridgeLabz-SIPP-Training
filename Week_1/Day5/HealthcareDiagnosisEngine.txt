@@ -1,0 +1,68 @@
+
+Start
+
+Interface DiagnosisStrategy:
+    Method diagnose(symptoms: List<String>): List<String>
+
+Class RuleBasedDiagnosis implements DiagnosisStrategy:
+    Method diagnose(symptoms):
+        suggestions = new List<String>()
+        If ("fever" in symptoms AND "cough" in symptoms AND "fatigue" in symptoms) Then
+            suggestions.add("Flu")
+            suggestions.add("COVID-19")
+        If ("headache" in symptoms AND "nausea" in symptoms) Then
+            suggestions.add("Migraine")
+        Return suggestions
+
+Class AIBasedDiagnosis implements DiagnosisStrategy:
+    Method diagnose(symptoms):
+
+        suggestions = new List<String>()
+        scoreMap = new Map<String, Integer>()
+        For each s in symptoms:
+            // adjust scores per learned model (mock)
+            scoreMap["Migraine"] = scoreMap.getOrDefault("Migraine",0) + 2
+            scoreMap["Vertigo"]  = scoreMap.getOrDefault("Vertigo",0) + 1
+        Return top 2 diseases by scoreMap
+
+Class ProbabilityBasedDiagnosis implements DiagnosisStrategy:
+    Method diagnose(symptoms):
+
+        probMap = new Map<String, Double>()
+        probMap["Common Cold"] = 0.35
+        probMap["Flu"] = 0.40
+        probMap["COVID-19"] = 0.25
+        Return diseases with probability > 0.30
+
+Class DiagnosisContext:
+    Attribute strategy: DiagnosisStrategy
+
+    Constructor(strategy):
+        this.strategy = strategy
+
+    Method setStrategy(strategy):
+        this.strategy = strategy
+
+    Method run(symptoms):
+        Return strategy.diagnose(symptoms)
+
+Function demo():
+    ctx = new DiagnosisContext(new RuleBasedDiagnosis())
+    result1 = ctx.run(["fever","cough","fatigue"])
+    Print result1   // expects Flu / COVID-19
+
+    
+    ctx.setStrategy(new AIBasedDiagnosis())
+    result2 = ctx.run(["headache","dizziness","nausea"])
+    Print result2   // expects Migraine / Vertigo
+
+    
+    Class GeneticPatternDiagnosis implements DiagnosisStrategy:
+        Method diagnose(symptoms):
+            Return ["Genetic Disorder A", "Genetic Disorder B"]
+
+    ctx.setStrategy(new GeneticPatternDiagnosis())
+    result3 = ctx.run(["family-history","rare-marker"])
+    Print result3
+
+ End
